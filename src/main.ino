@@ -15,7 +15,7 @@ SoftwareSerial mySoftwareSerial(PIN_MP3_RX, PIN_MP3_TX); // RX, TX
 
 // Create the DFPlayerMini object
 DFRobotDFPlayerMini player;
-w
+
 // Constants for LED
 #define NUM_LEDS 300
 #define GRB CRGB(10,0,0)    // color of the LED
@@ -26,6 +26,7 @@ CRGB leds[NUM_LEDS];
 
 // Constants for the stepper motor
 #define stepsPerRevolution 200
+#define revolutions 10
 
 // Constants for the RGB LED
 #define RGB_BRIGHTNESS 1
@@ -67,5 +68,20 @@ void setup() {
 }
 
 void loop(){
+    // Set the spinning direction counterclockwise;
+    digitalWrite(dirPin, LOW);
 
+    // Spin the stepper motor 1 revolution quickly:
+    rgbLedWrite(RGB_BUILTIN, 0, 0, RGB_BRIGHTNESS);
+    for (int i = 0; i < revolutions; i++) {
+        // These four lines result in 1 step:
+        digitalWrite(stepPin, HIGH);
+        delayMicroseconds(500);
+        digitalWrite(stepPin, LOW);
+        delayMicroseconds(500);
+    }
+}
+
+void GoUp() {
+    
 }
